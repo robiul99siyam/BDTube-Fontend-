@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Details from './Details';
+import Description from './Description';
 
 const ParentComponent = () => {
     const { id } = useParams();
@@ -22,6 +23,7 @@ const ParentComponent = () => {
                 <Details data={data} id={id} />
                 <Sidebar data={data} />
             </div>
+            <Description data={data}/>
         </>
     );
 };
