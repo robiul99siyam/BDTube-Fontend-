@@ -10,7 +10,7 @@ const Register = () => {
             </div>
             <div className="grid grid-cols-12 gap-10 mt-10 px-0 md:px-10 py-19">
                 <div className="md:col-span-6 col-span-12">
-                    <img src={RegisterImg} alt="RegisterImage" />
+                    <img className="animate-fadeInUp"  style={{ animationDelay: '0.5s' }}  src={RegisterImg} alt="RegisterImage" />
                     <p className="font-extrabold text-center text-2xl mt-5">Create your Account</p>
                 </div>
                 <div className="md:col-span-6 col-span-12 p-1">
