@@ -8,7 +8,7 @@ const Sidebar = ({ data, onItemSelect, id }) => {
                 <Link to={`/view-content/${item.id}`} key={item.id}>
                     <div
                        
-                        className="flex gap-3 font-medium hover:bg-slate-900 rounded-md p-2 cursor-pointer"
+                        className="flex gap-3 font-medium hover:bg-gray-200 rounded-md p-2 cursor-pointer"
                         onClick={() => onItemSelect(item.id)}
                     >
                         <img className="w-28 rounded-xl" src={item.thumbell} alt="" />
@@ -24,3 +24,5 @@ const Sidebar = ({ data, onItemSelect, id }) => {
 };
 
 export default Sidebar;
+
+
