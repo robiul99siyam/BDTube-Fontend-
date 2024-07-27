@@ -19,7 +19,7 @@ const Navbar = () => {
                 <form method="get" className="flex justify-center">
 
                     <input type="text" name="search"
-                        className="block w-[220px] md:w-[500px] focus:outline-none  xl:w-[650px]  rounded-l-full border-0 py-1.5 md:py-3 pl-8 p-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                        className="block  bg-slate-800 text-white w-[220px] md:w-[500px] focus:outline-none  xl:w-[650px]  rounded-l-full border-0 py-1.5 md:py-3 pl-8 p-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                         placeholder="search" />
 
                     <button className="bg-gray-300 py-1.5 md:py-3 w-10 md:w-25 xl:w-[80px] rounded-r-full focus:ring-green-600 ">
