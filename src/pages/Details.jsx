@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 
 const Details = ({ data, id }) => {
     const [detailItem, setDetailItem] = useState(null);
-
+    const [open,setOpen] = useState(false);
+    
     useEffect(() => {
         const foundItem = data.find(item => String(item.id) === id);
         setDetailItem(foundItem);
@@ -14,7 +15,9 @@ const Details = ({ data, id }) => {
     }
 
     return (
-        <div className='col-span-8 w-[70%] md:col-span-5 xl:col-span-6'>
+        <>
+        
+        <div className='col-span-8 w-[70%] md:col-span-5 pb-10 xl:col-span-6'>
             <video id="videoPlayer" controls autoPlay className="w-full rounded-xl">
                 <source src={detailItem.videofile} type="video/mp4" />
                 Your browser does not support the video tag.
@@ -28,7 +31,21 @@ const Details = ({ data, id }) => {
                 </div>
                 <h1>{detailItem.title}</h1>
             </div>
+
+            <p>Description 👏👏</p>
+            <p className='cursor-pointer' onClick={()=> setOpen(!open)}>
+                {
+               
+                    !open ? `${detailItem.description.slice(0,150)}`  : `${detailItem.description}`
+                }
+                {
+                    !open ? <p className="font-bold">See More....</p> : <p className="font-bold">See Less....... </p>  
+                }
+            </p>
         </div>
+        
+        
+        </>
     );
 };
 

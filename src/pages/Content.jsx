@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import ContentImg from '../image/Add a little bit of body text (7).png';
 import { Link } from 'react-router-dom';
 
 const Content = () => {
@@ -12,6 +11,10 @@ const Content = () => {
             .catch(err => console.error(err));
     }, []);
 
+    if(!data){
+        <p>loading ....... </p>
+    }
+
     return (
         <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-10">
             {data.map(item => (
@@ -21,7 +24,7 @@ const Content = () => {
                             <img
                                 src={item.thumbell}
                                 className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
-                                alt="content"
+                                alt="thumbell"
                             />
                             <video
                                 className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
