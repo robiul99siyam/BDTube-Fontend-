@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+       
+    };
     return (
         <>
             <div className="navbar  mt-2 flex  justify-between items-center">
@@ -16,7 +20,7 @@ const Navbar = () => {
                 {/* this is here input part  */}
 
 
-                <form method="get" className="flex justify-center">
+                <form onSubmit={handleSubmit} method="get" className="flex justify-center">
 
                     <input type="text" name="search"
                         className="block  w-[220px] md:w-[500px] focus:outline-none  xl:w-[650px]  rounded-l-full border-0 py-1.5 md:py-3 pl-8 p-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
