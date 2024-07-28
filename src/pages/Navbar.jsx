@@ -28,8 +28,8 @@ const Navbar = () => {
 
 
 
+                <i class="fa-solid fa-bell"></i>
                 {/* this is dropdown part  */}
-
                 <div className="dropdown dropdown-bottom dropdown-end ">
 
                     <div tabindex="0" role="button" className="m-1 md:px-2 p-2 ml-2 w-16  rounded-full">
