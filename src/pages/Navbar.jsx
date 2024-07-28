@@ -52,7 +52,9 @@ const Navbar = () => {
                         <li>
                             <Link to={"/register"}>Sing Up</Link>
                         </li>
-                        <li><a href="#">Sign In</a></li>
+                        <li>
+                            <Link to={"/login"}>Sing In</Link>
+                        </li>
                     </ul>
 
 

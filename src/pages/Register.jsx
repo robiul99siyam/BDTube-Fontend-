@@ -91,7 +91,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <button className="w-full md:w-[90%] bg-blue-600 text-white py-3 font-extrabold rounded-sm hover:bg-blue-700 transform-gpu" type="submit">Create your account </button>
+                    <button className="w-full md:w-[90%] bg-red-500 text-white py-3 font-extrabold rounded-sm hover:bg-red-600 " type="submit">Create your account </button>
 
 
                     <div className="flex gap-5 justify-center mt-8 mb-8">
@@ -100,7 +100,7 @@ const Register = () => {
                         <p>___________________</p>
                     </div>
 
-                    <p className="font-extrabold text-center">Already Register? <span className="font-extrabold text-blue-600"><Link>Login</Link></span></p>
+                    <p className="font-extrabold text-center">Already Register? <span className="font-extrabold text-blue-600"><Link to={"/login"}>Login</Link></span></p>
 
                 </div>
             </div>
