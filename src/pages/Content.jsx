@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 const Content = () => {
     const [data, setData] = useState([]);
 
+ 
     useEffect(() => {
         fetch("https://bdtube-backend.onrender.com/netfiex/app/content/")
             .then(res => res.json())
             .then(data => setData(data))
-            .catch(err => console.error(err));
+            .catch(err => console.error('Error fetching content:', err));
     }, []);
 
     if (data.length === 0) {
-       
         return (
             <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
                 {Array(6).fill().map((_, index) => (
@@ -47,7 +47,7 @@ const Content = () => {
     return (
         <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
             {data.map(item => (
-                <Link to={`/view-content/${item.id}`} key={item.id}>
+                <Link  to={`/view-content/${item.id}`} key={item.id}>
                     <div className="relative group card bg-base-100 shadow-xl h-80">
                         <figure className="relative h-64">
                             <img

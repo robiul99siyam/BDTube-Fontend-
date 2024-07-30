@@ -48,7 +48,9 @@ const Navbar = () => {
                         </div>
 
                         <br />
-                        <button className="btn btn-primary">View Profile</button>
+                        <button className="btn btn-primary">
+                            <Link to={'/DeshboardHome'}>View Profile</Link>
+                        </button>
                         <br />
 
                         <li><a href="#">Upload Content</a></li>
