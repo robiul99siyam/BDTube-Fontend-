@@ -13,22 +13,22 @@ const DeshboardHome = () => {
                 <div className="col-span-4 shadow-xl rounded-md">
                     <div className="py-10 ">
                        <div>
-                       <p className="py-6 px-3  hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                       <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                            <Link to={"/Homes"}> <i className="fa-solid px-3 fa-house"></i> Home</Link>
                         </p>
-                        <p className="py-6 px-3 hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                        <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                            <Link to={"/Personal"}> <i className="fa-solid px-3 fa-user"></i> Personal Information</Link>
                         </p>
-                        <p className="py-6 px-3 hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                        <p className="py-6 px-3 border-l-8 border-l-white  hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                             <i className="fa-solid px-3 fa-list"></i> Playlist
                         </p>
-                        <p className="py-6 px-3 hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                        <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                             <i className="fa-solid px-3 fa-video"></i> Video Upload
                         </p>
-                        <p className="py-6 px-3 hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                        <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                             <i className="fa-solid px-3 fa-chart-simple"></i> Graph
                         </p>
-                        <p className="py-6 px-3 hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-700">
+                        <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                             <i className="fa-solid px-3 fa-right-from-bracket"></i> Logout
                         </p>
                     </div>
