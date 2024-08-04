@@ -9,6 +9,7 @@ const DeshboardHome = () => {
                 <h1 className="font-bold text-2xl"><Link to={"/"}><i className="fa-brands fa-youtube text-red-500"></i> BDTube Profile</Link></h1>
                 <h1>UserName: Robiul</h1>
             </div>
+            {/* deshbard part  */}
             <div className="grid grid-cols-12 gap-10 mt-10 px-0 md:px-10 py-19">
                 <div className="col-span-4 shadow-xl rounded-md">
                     <div className="py-10 ">
