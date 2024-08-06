@@ -9,7 +9,7 @@ import Homes from './pages/deshboard/Homes';
 import Personal from './pages/deshboard/Personal';
 
 
-
+{%  routing here %}
 function App() {
 	return (
 		<BrowserRouter>
