@@ -5,11 +5,11 @@ import ProfileImage from "../image/Porfolo pic.png"
 const Navbar = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
-       
+
     };
     return (
         <>
-           <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-white">
+            <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-white">
 
                 {/* this is here logo part  */}
                 <div className="flex justify-between items-center">
@@ -30,10 +30,12 @@ const Navbar = () => {
                     <button className="bg-gray-300 py-1.5 md:py-3 w-10 md:w-25 xl:w-[80px] rounded-r-full focus:ring-green-600 ">
                         <i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
+                <div>
+                    <i class="fa-solid fa-bell bg-gray-50 px-4 py-3 ring-1 text-xl shadow-sm rounded-full"></i>
+                </div>
 
 
 
-                <i class="fa-solid fa-bell"></i>
                 {/* this is dropdown part  */}
                 <div className="dropdown dropdown-bottom dropdown-end ">
 
