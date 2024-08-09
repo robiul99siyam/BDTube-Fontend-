@@ -11,7 +11,7 @@ const ParentComponent = () => {
     const [selectedId, setSelectedId] = useState(id);
 
     useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/app/content/")
+        fetch("https://bdtube-backend.onrender.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => console.error(err));

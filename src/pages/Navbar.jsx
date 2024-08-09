@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ProfileImage from "../image/Porfolo pic.png"
 
 const Navbar = () => {
     const handleSubmit = (event) => {
@@ -8,7 +9,7 @@ const Navbar = () => {
     };
     return (
         <>
-            <div className="navbar  mt-2 flex  justify-between items-center">
+           <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-white">
 
                 {/* this is here logo part  */}
                 <div className="flex justify-between items-center">
@@ -37,14 +38,14 @@ const Navbar = () => {
                 <div className="dropdown dropdown-bottom dropdown-end ">
 
                     <div tabindex="0" role="button" className="m-1 md:px-2 p-2 ml-2 w-16  rounded-full">
-                        <img src="https://i.ibb.co/L1yWBQ6/Porfolo-pic.png" alt="" />
+                        <img src={ProfileImage} alt="" />
                     </div>
 
 
                     {/* ul li data show  */}
                     <ul tabIndex="0" className="dropdown-content menu bg-base-100 rounded-box z-[1] w-64 mt-5 shadow">
                         <div className="m-1 md:px-2 p-2 ml-14 w-20 rounded-full">
-                            <img src="https://i.ibb.co/L1yWBQ6/Porfolo-pic.png" alt="" />
+                            <img src={ProfileImage} alt="" />
                         </div>
 
                         <br />

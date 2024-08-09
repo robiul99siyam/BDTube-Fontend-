@@ -52,14 +52,14 @@ const Details = ({ data, id }) => {
                     Your browser does not support the video tag.
                 </video>
                 <div className='card-body mt-4'>
-                    <h1 className='font-bold'>This video views : {detailItem.total_views}</h1>
+                  
                     <div className="flex gap-4 items-center mt-2">
                         <h1 className='bg-gray-700 ring-[3px]  text-white hover:bg-gray-900 px-3   py-1 rounded-[50%] '>
                             {detailItem.author && detailItem.author.username.charAt(0).toUpperCase()
                             }
                         </h1>
                         <button id="likeButton" type="button" className="ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
-                            <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span id="likeCount">0</span>
+                            <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span id="likeCount">{detailItem.total_likes}</span>
                         </button>
                     </div>
                     <h1>{detailItem.title}</h1>
@@ -67,9 +67,10 @@ const Details = ({ data, id }) => {
 
 
                 <div className='bg-gray-200 rounded-lg p-3'>
+                <h1 className='font-bold'>This video views : {detailItem.total_views}</h1>
                     <p className='cursor-pointer' onClick={() => setOpen(!open)}>
                         {
-
+                            
                             !open ? `${detailItem.description.slice(0, 150)}` : `${detailItem.description}`
                         }
                         {

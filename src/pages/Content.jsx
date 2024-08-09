@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Content = () => {
     const [data, setData] = useState([]);
 
- 
+
     useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/app/content/")
+        fetch("https://bdtube-backend.onrender.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => console.error('Error fetching content:', err));
@@ -47,7 +47,7 @@ const Content = () => {
     return (
         <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
             {data.map(item => (
-                <Link  to={`/view-content/${item.id}`} key={item.id}>
+                <Link to={`/view-content/${item.id}`} key={item.id}>
                     <div className="relative group card bg-base-100 shadow-xl h-80">
                         <figure className="relative h-64">
                             <img
@@ -75,7 +75,10 @@ const Content = () => {
                             </div>
                             <div className="flex gap-3 justify-between">
                                 <h1 className='font-bold'>{item.language}</h1>
-                                <h1 className='font-bold'>Release: {new Date(item.relase_date).getFullYear()}</h1>
+                                <h1 className='font-bold'>
+                                    Release: {new Date(item.relase_date).getFullYear()} {new Date(item.relase_date).toLocaleString('default', { month: 'long' })} {new Date(item.relase_date).getDate()}
+                                </h1>
+
                             </div>
                         </div>
                     </div>
