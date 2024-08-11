@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
+import Content from './Content';
 
 const Category = () => {
 
     const [data, setData] = useState([]);
-
+    const [selectedCategory, setSelectedCategory] = useState("");
     useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/app/category/")
+        fetch("https://bdtube-backend.onrender.com/netfiex/api/category/")
             .then(res => res.json())
             .then(data => setData(data));
     }, [])
 
+    const filteredData = selectedCategory
+        ? data.filter(item => item.name === "Commdy")
+        : data;
+    console.log(filteredData.name);
 
     return (
         <>
@@ -17,10 +22,23 @@ const Category = () => {
 
                 {
                     data.map(item => (
-                        <button key={item.id}  className="btn btn-gray  ">{item.name}</button>
+                        <button
+                            key={item.id}
+                            className={`btn ${selectedCategory === item.name ? 'btn-primary' : 'btn-gray'}`}
+                            onClick={() => setSelectedCategory(item.name)}
+                        >
+                            {item.name}
+                        </button>
                     ))
                 }
-              
+
+                {
+                    filteredData.length
+                }
+
+
+
+
 
 
             </div>

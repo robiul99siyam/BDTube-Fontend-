@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Comment from './Comment';
 
 
 
@@ -52,7 +53,7 @@ const Details = ({ data, id }) => {
                     Your browser does not support the video tag.
                 </video>
                 <div className='card-body mt-4'>
-                  
+
                     <div className="flex gap-4 items-center mt-2">
                         <h1 className='bg-gray-700 ring-[3px]  text-white hover:bg-gray-900 px-3   py-1 rounded-[50%] '>
                             {detailItem.author && detailItem.author.username.charAt(0).toUpperCase()
@@ -67,17 +68,20 @@ const Details = ({ data, id }) => {
 
 
                 <div className='bg-gray-200 rounded-lg p-3'>
-                <h1 className='font-bold'>This video views : {detailItem.total_views}</h1>
+                    <h1 className='font-bold'>This video views : {detailItem.total_views}</h1>
                     <p className='cursor-pointer' onClick={() => setOpen(!open)}>
                         {
-                            
+
                             !open ? `${detailItem.description.slice(0, 150)}` : `${detailItem.description}`
                         }
                         {
-                            !open ? <p className="font-bold">See More....</p> : <p className="font-bold">See Less....... </p>
+                            !open ? <p className="font-bold">See More....</p> : <p className="font-bold">See Less.... </p>
                         }
                     </p>
                 </div>
+
+
+                <Comment videoId={detailItem.id} />
             </div>
 
 
