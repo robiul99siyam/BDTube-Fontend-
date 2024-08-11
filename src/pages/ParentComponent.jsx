@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 import Details from './Details';
 import Comment from './Comment';
 import Content from './Content';
-import Category from './Category';
+
 
 const ParentComponent = () => {
     const { id } = useParams();

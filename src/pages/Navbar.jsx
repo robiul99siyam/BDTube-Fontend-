@@ -9,7 +9,7 @@ const Navbar = () => {
     };
     return (
         <>
-            <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-white">
+            <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-gray-50">
 
                 {/* this is here logo part  */}
                 <div className="flex justify-between items-center">

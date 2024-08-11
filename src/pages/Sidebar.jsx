@@ -14,7 +14,7 @@ const Sidebar = ({ data, onItemSelect, id }) => {
                         >
                             <img className="w-28 rounded-xl" src={item.thumbell} alt="" />
                             <div className="flex flex-col gap-1">
-                                <h1 className='font-bold text-md'>{item.title.length > 40 ? `${item.title.slice(0, 40)}...` : item.title}</h1>
+                            <h1 className='font-bold text-md'>{item.title.slice(0, 35)}...</h1>
 
                             </div>
                         </div>
