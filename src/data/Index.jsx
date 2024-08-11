@@ -1,8 +1,6 @@
 import React from 'react';
 import Navbar from './../pages/Navbar';
 import Content from './../pages/Content';
-import Category from './../pages/Category';
-import Details from './../pages/Details';
 
 
 const Home = () => {
@@ -11,7 +9,6 @@ const Home = () => {
 
             <div >
                 <Navbar />
-                <Category />
                 <Content />
             </div>
             

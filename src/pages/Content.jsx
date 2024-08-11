@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Content = () => {
     const [data, setData] = useState([]);
-
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
         fetch("https://bdtube-backend.onrender.com/netfiex/api/content/")
@@ -11,6 +11,13 @@ const Content = () => {
             .then(data => setData(data))
             .catch(err => console.error('Error fetching content:', err));
     }, []);
+
+    const categories = [...new Set(data.map(item => item.category.name))];
+
+    const filteredData = selectedCategory === 'all'
+        ? data
+        : data.filter(item => item.category.name === selectedCategory);
+
 
     if (data.length === 0) {
         return (
@@ -45,69 +52,67 @@ const Content = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
-            {data.map(item => (
-                <Link to={`/view-content/${item.id}`} key={item.id}>
-                    <div className="relative group card bg-base-100 shadow-xl h-80">
-                        <figure className="relative h-64">
-                            <img
-                                src={item.thumbell}
-                                className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
-                                alt="thumbell"
-                            />
-                            <video
-                                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                src={item.videofile}
-                                type="video/mp4"
-                                autoPlay
-                                muted
-                                loop
-                            >
-                                Your browser does not support the video tag.
-                            </video>
-                        </figure>
-                        <div className="card-body flex flex-col justify-between h-40">
-                            <div className='flex gap-2'>
-                                <h1 className='bg-gray-900 ring-green-700 text-white hover:bg-gray-800 px-3 ring-[3px] py-1 rounded-[50%]'>
-                                    {item.author && item.author.username.charAt(0).toUpperCase()}
-                                </h1>
-                                <h1 className='font-bold text-md'>{item.title.slice(0, 35)}...</h1>
-                            </div>
-                            <div className="flex gap-3 justify-between">
-                                <h1 className='font-bold'>{item.language}</h1>
-                                <h1 className='font-bold'>
-                                    Release: {new Date(item.relase_date).getFullYear()} {new Date(item.relase_date).toLocaleString('default', { month: 'long' })} {new Date(item.relase_date).getDate()}
-                                </h1>
-
+        <div>
+            <div className="py-4">
+                <div className="flex gap-4 mb-4">
+                    <button
+                        className={`btn ${selectedCategory === 'all' ? 'btn-primary' : 'btn-gray'}`}
+                        onClick={() => setSelectedCategory('all')}
+                    >
+                        All
+                    </button>
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            className={`btn ${selectedCategory === category ? 'btn-primary' : 'btn-gray'}`}
+                            onClick={() => setSelectedCategory(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
+                {filteredData.map(item => (
+                    <Link to={`/view-content/${item.id}`} key={item.id}>
+                        <div className="relative group card bg-base-100 shadow-xl h-80">
+                            <figure className="relative h-64">
+                                <img
+                                    src={item.thumbell}
+                                    className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
+                                    alt="thumbell"
+                                />
+                                <video
+                                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    src={item.videofile}
+                                    type="video/mp4"
+                                    autoPlay
+                                    muted
+                                    loop
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                            </figure>
+                            <div className="card-body flex flex-col justify-between h-40">
+                                <div className='flex gap-2'>
+                                    <h1 className='bg-gray-900 ring-green-700 text-white hover:bg-gray-800 px-3 ring-[3px] py-1 rounded-[50%]'>
+                                        {item.author && item.author.username.charAt(0).toUpperCase()}
+                                    </h1>
+                                    <h1 className='font-bold text-md'>{item.title.slice(0, 35)}...</h1>
+                                </div>
+                                <div className="flex gap-3 justify-between">
+                                    <h1 className='font-bold'>{item.language}</h1>
+                                    <h1 className='font-bold'>
+                                        Release: {new Date(item.relase_date).getFullYear()} {new Date(item.relase_date).toLocaleString('default', { month: 'long' })} {new Date(item.relase_date).getDate()}
+                                    </h1>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Link>
-
-
-
-
-
-
-
-
-
-            ))}
-
-
-
-
-
-
-
-
-
-
+                    </Link>
+                ))}
+            </div>
         </div>
     );
 };
 
 export default Content;
-
-
-
