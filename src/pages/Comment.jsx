@@ -1,21 +1,7 @@
 import { useEffect, useState } from "react";
 
-const Comment = ({ videoId }) => {
-    const [data, setData] = useState([]);
-    const [filteredComments, setFilteredComments] = useState([]);
+const Comment = () => {
 
-    useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/api/review/")
-            .then(res => res.json())
-            .then(data => setData(data))
-            .catch(err => console.error(err));
-    }, []);
-
-    useEffect(() => {
-        
-        const commentsForVideo = data.filter(item => item.content.id === videoId);
-        setFilteredComments(commentsForVideo);
-    }, [data, videoId]);
 
     return (
         <>
@@ -29,27 +15,13 @@ const Comment = ({ videoId }) => {
                     Comment
                 </button>
             </div>
-            <h1>Comments 👏👏</h1>
+            
 
-            <div>
-                {filteredComments.length > 0 ? (
-                    filteredComments.map((item, index) => (
-                        <CommentItem key={index} comment={item.comment} />
-                    ))
-                ) : (
-                    <p>No comments found for this video.</p>
-                )}
-            </div>
+           
         </>
     );
 };
 
-const CommentItem = ({ comment }) => {
-    return (
-        <div className="comment-item">
-            <p>{comment}</p>
-        </div>
-    );
-};
+
 
 export default Comment;

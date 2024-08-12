@@ -15,7 +15,7 @@ const ParentComponent = () => {
 
 
     useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/api/content/")
+        fetch("http://127.0.0.1:8000/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => console.error(err));
@@ -32,8 +32,6 @@ const ParentComponent = () => {
                 <Details data={data} id={selectedId} />
                 <Sidebar data={data} id={id} onItemSelect={setSelectedId} />
             </div>
-            <div>
-        </div>
           
         </>
     );

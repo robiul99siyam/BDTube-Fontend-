@@ -6,7 +6,7 @@ const Content = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
-        fetch("https://bdtube-backend.onrender.com/netfiex/api/content/")
+        fetch("http://127.0.0.1:8000/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => console.error('Error fetching content:', err));
@@ -98,7 +98,7 @@ const Content = () => {
                                     <h1 className='bg-gray-900 ring-green-700 text-white hover:bg-gray-800 px-3 ring-[3px] py-1 rounded-[50%]'>
                                         {item.author && item.author.username.charAt(0).toUpperCase()}
                                     </h1>
-                                    <h1 className='font-bold text-md'>{item.title.slice(0, 35)}...</h1>
+                                    <h1 className='font-bold text-md'>{item.title.slice(0, 30)}...</h1>
                                 </div>
                                 <div className="flex gap-3 justify-between">
                                     <h1 className='font-bold'>{item.language}</h1>

@@ -81,7 +81,31 @@ const Details = ({ data, id }) => {
                 </div>
 
 
-                <Comment videoId={detailItem.id} />
+                <Comment />
+
+
+                <h1>Comments 👏👏</h1>
+
+                {detailItem.reivew_content && detailItem.reivew_content.length > 0 ? (
+                    detailItem.reivew_content.map((review) => (
+                        <div key={review.id} className="flex gap-4 items-center mt-2">
+                            <h1 className='bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]'>
+                                {review.user.username && review.user.username.charAt(0).toUpperCase()}
+                            </h1>
+                            <p>{review.comment}</p>
+                            <small>{new Date(review.datePosted).toLocaleDateString()}</small>
+                        </div>
+                    ))
+                ) : (
+                    <p>No reviews available.</p>
+                )}
+
+
+
+
+
+
+
             </div>
 
 
