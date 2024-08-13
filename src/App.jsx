@@ -19,12 +19,15 @@ function App() {
 				<Route path='/view-content/:id' element={<ParentComponent />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login/>}/>
-				<Route path='/DeshboardHome' element={<DeshboardHome />}/>
-				<Route path='/Homes' element={<Homes />}/>
-				<Route path='/Personal' element={<Personal />}/>
 				
 				
-
+				
+				<Route path='/DeshboardHome' element={<DeshboardHome />}>
+					<Route path='homes' element={<Homes />} />
+					<Route path='personal' element={<Personal />} />
+					{/* Add more routes here if needed */}
+				</Route>
+			
 				
 				
 

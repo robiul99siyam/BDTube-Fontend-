@@ -1,8 +1,10 @@
+import DeshboardHome from './DeshboardHome';
 const Personal = ()=>{
 
     return(
         <>
-        <h1>Personal </h1>
+     
+        <h1>This is Personal information  </h1>
         </>
     );
 }

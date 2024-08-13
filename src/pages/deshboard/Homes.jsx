@@ -1,8 +1,12 @@
+import DeshboardHome from './DeshboardHome';
 const Homes = ()=>{
 
     return(
         <>
-        <h1>Homes </h1>
+            
+           
+                
+               <h1>this is page homes </h1>
         </>
     );
 }

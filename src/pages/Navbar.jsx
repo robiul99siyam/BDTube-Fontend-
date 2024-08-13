@@ -9,7 +9,7 @@ const Navbar = () => {
     };
     return (
         <>
-            <div className="navbar mt-2 flex justify-between items-center sticky top-0 bg-gray-50">
+            <div className="navbar mt-2 flex justify-between items-center  sticky top-0 ">
 
                 {/* this is here logo part  */}
                 <div className="flex justify-between items-center">
@@ -19,7 +19,7 @@ const Navbar = () => {
                 </div>
 
                 {/* this is here input part  */}
-
+               
 
                 <form onSubmit={handleSubmit} method="get" className="flex justify-center">
 
@@ -30,9 +30,7 @@ const Navbar = () => {
                     <button className="bg-gray-300 py-1.5 md:py-3 w-10 md:w-25 xl:w-[80px] rounded-r-full focus:ring-green-600 ">
                         <i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                <div>
-                    <i class="fa-solid fa-bell bg-gray-50 px-4 py-3 ring-1 text-xl shadow-sm rounded-full"></i>
-                </div>
+               
 
 
 
@@ -67,9 +65,12 @@ const Navbar = () => {
                     </ul>
 
 
+                  
                 </div>
 
             </div>
+
+
         </>
     );
 }
