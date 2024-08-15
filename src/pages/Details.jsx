@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Comment from './Comment';
-
+import swal from 'sweetalert';
 
 
 const Details = ({ data, id }) => {
     const [detailItem, setDetailItem] = useState(null);
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate()
 
 
+    useEffect(()=>{
 
+        const token = localStorage.getItem("authToken")
+        const userId = localStorage.getItem("userId")
+
+        if(!token && !userId){
+            const timer = setTimeout(()=>{
+                swal({
+                    text: "Please login to continue.",
+                    icon: "error", 
+                    timer: 4000,  
+                    buttons:false,
+                });
+                navigate("/login")
+            },20000);
+
+            return ()=> clearTimeout(timer);
+        }
+    },[navigate])
 
     useEffect(() => {
         const foundItem = data.find(item => String(item.id) === id);
