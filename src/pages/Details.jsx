@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Comment from './Comment';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 
 const Details = ({ data, id }) => {
@@ -10,25 +11,58 @@ const Details = ({ data, id }) => {
     const navigate = useNavigate()
 
 
-    useEffect(()=>{
+
+    useEffect(() => {
 
         const token = localStorage.getItem("authToken")
         const userId = localStorage.getItem("userId")
 
-        if(!token && !userId){
-            const timer = setTimeout(()=>{
+        if (!token && !userId) {
+            const timer = setTimeout(() => {
                 swal({
                     text: "Please login to continue.",
-                    icon: "error", 
-                    timer: 4000,  
-                    buttons:false,
+                    icon: "error",
+                    timer: 4000,
+                    buttons: false,
                 });
                 navigate("/login")
-            },20000);
+            }, 20000);
 
-            return ()=> clearTimeout(timer);
+            return () => clearTimeout(timer);
         }
-    },[navigate])
+    }, [navigate])
+
+    useEffect(() => {
+    }, [])
+
+    const handleLike = async () => {
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("authToken");
+        const paylike = {
+            user: parseInt(userId),
+            content: parseInt(id),
+        };
+        clg
+        try {
+            const ids = parseInt(id);
+            const response = await axios.post(`http://127.0.0.1:8000/netfiex/video/${id}/like`, paylike, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            console.log(response.data);
+        } catch (err) {
+            if (err.response) {
+                console.error("Error Data:", err.response.data);
+                swal({
+                    text: "Failed to submit comment. Please check your input.",
+                    icon: "error",
+                    timer: 4000,
+                    buttons: false,
+                });
+            } else {
+                console.error("Error:", err.message);
+            }
+        }
+    };
 
     useEffect(() => {
         const foundItem = data.find(item => String(item.id) === id);
@@ -78,9 +112,10 @@ const Details = ({ data, id }) => {
                             {detailItem.author && detailItem.author.username.charAt(0).toUpperCase()
                             }
                         </h1>
-                        <button id="likeButton" type="button" className="ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
+                        <button onClick={handleLike} id="likeButton" type="button" className="cursor-pointer ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
                             <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span id="likeCount">{detailItem.total_likes}</span>
                         </button>
+
                     </div>
                     <h1>{detailItem.title}</h1>
                 </div>
@@ -103,13 +138,13 @@ const Details = ({ data, id }) => {
                 <Comment />
 
 
-                <h1>Comments 👏👏</h1>
+                <h1>Comments 👏👏 {detailItem.reivew_content.length}</h1>
 
                 {detailItem.reivew_content && detailItem.reivew_content.length > 0 ? (
                     detailItem.reivew_content.map((review) => (
                         <div key={review.id} className="flex gap-4 items-center mt-2">
                             <h1 className='bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]'>
-                                {review.user.username && review.user.username.charAt(0).toUpperCase()}
+                                {review.username && review.username.charAt(0).toUpperCase()}
                             </h1>
                             <p>{review.comment}</p>
                             <small>{new Date(review.datePosted).toLocaleDateString()}</small>

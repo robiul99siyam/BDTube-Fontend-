@@ -5,7 +5,6 @@ import ParentComponent from './pages/ParentComponent';
 import Register from './pages/Register';
 import Login from "./pages/Login"
 import DeshboardHome from './pages/deshboard/DeshboardHome';
-import Homes from './pages/deshboard/Homes';
 import Personal from './pages/deshboard/Personal';
 
 
@@ -23,7 +22,6 @@ function App() {
 				
 				
 				<Route path='/DeshboardHome' element={<DeshboardHome />}>
-					<Route path='homes' element={<Homes />} />
 					<Route path='personal' element={<Personal />} />
 					{/* Add more routes here if needed */}
 				</Route>

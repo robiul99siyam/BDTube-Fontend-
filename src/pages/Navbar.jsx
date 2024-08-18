@@ -24,7 +24,7 @@ const Navbar = () => {
         if (userId && token) {
             const userProfile = data.find(item => item.user.id === parseInt(userId));
             if (userProfile) {
-                setProfileImage(userProfile.image); 
+                setProfileImage(userProfile.image);
             }
         }
     }, [data]);
@@ -41,6 +41,14 @@ const Navbar = () => {
         navigate("/login");
     };
 
+    const handleSearch = async (event) => {
+        event.preventDefault();
+        const query = event.target.search.value;
+        const response = await fetch(`http://127.0.0.1:8000/netfiex/api/content/?search=${query}`);
+        const data = await response.json();
+        console.log(data); // Display your search results
+    };
+    
     return (
         <>
             <div className="navbar mt-2 flex justify-between items-center sticky top-0">
@@ -52,7 +60,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Search Part */}
-                <form onSubmit={(e) => e.preventDefault()} method="get" className="flex justify-center">
+                <form onSubmit={handleSearch} className="flex justify-center">
                     <input
                         type="search"
                         name="search"
@@ -85,7 +93,7 @@ const Navbar = () => {
                         </div>
 
                         <br />
-                      
+
 
                         {!isLogin && (
                             <>
@@ -97,7 +105,7 @@ const Navbar = () => {
                         {isLogin && (
                             <>
                                 <button className="btn btn-primary">
-                                    <Link to={'/DeshboardHome'}>View Profile</Link>
+                                    <Link to={'/DeshboardHome/personal'}>View Profile</Link>
                                 </button>
                                 <br />
                                 <li><Link to="#">Upload Content</Link></li>
