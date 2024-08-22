@@ -38,31 +38,71 @@ const Details = ({ data, id }) => {
     const handleLike = async () => {
         const userId = localStorage.getItem("userId");
         const token = localStorage.getItem("authToken");
+
+        if (!userId || !token) {
+            swal({
+                text: "Please login to like this video.",
+                icon: "error",
+                timer: 4000,
+                buttons: false,
+            });
+            return;
+        }
+
         const paylike = {
             user: parseInt(userId),
-            content: parseInt(id),
+            content: parseInt(id)
         };
-        clg
+
+        console.log("Data to send:", paylike);
+
         try {
-            const ids = parseInt(id);
-            const response = await axios.post(`http://127.0.0.1:8000/netfiex/video/${id}/like`, paylike, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            console.log(response.data);
+            // Sending the data as JSON
+            const response = await axios.post(
+                `http://127.0.0.1:8000/netfiex/video/${id}/like/`,
+                paylike,
+                { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
+            );
+            console.log("Like response:", response.data);
+
+            if (response.data) {
+
+                setDetailItem((prevDetailItem) => ({
+                    ...prevDetailItem,
+                    total_likes: prevDetailItem.total_likes + 1,
+                }));
+                
+                swal({
+                    text: "Content liked successfully.",
+                    icon: "success",
+                    timer: 4000,
+                    buttons: false,
+                });
+            }
+
         } catch (err) {
             if (err.response) {
                 console.error("Error Data:", err.response.data);
                 swal({
-                    text: "Failed to submit comment. Please check your input.",
+                    text: "You have Already Like it ",
                     icon: "error",
                     timer: 4000,
                     buttons: false,
                 });
             } else {
                 console.error("Error:", err.message);
+                swal({
+                    text: "An unexpected error occurred.",
+                    icon: "error",
+                    timer: 4000,
+                    buttons: false,
+                });
             }
         }
     };
+
+
+
 
     useEffect(() => {
         const foundItem = data.find(item => String(item.id) === id);
@@ -112,7 +152,7 @@ const Details = ({ data, id }) => {
                             {detailItem.author && detailItem.author.username.charAt(0).toUpperCase()
                             }
                         </h1>
-                        <button onClick={handleLike} id="likeButton" type="button" className="cursor-pointer ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
+                        <button onClick={handleLike} id="likeCount" type="button" className="cursor-pointer ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
                             <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span id="likeCount">{detailItem.total_likes}</span>
                         </button>
 

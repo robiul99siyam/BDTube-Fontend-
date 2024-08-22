@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import Login from "./pages/Login"
 import DeshboardHome from './pages/deshboard/DeshboardHome';
 import Personal from './pages/deshboard/Personal';
-
+import VideoUpload from './pages/deshboard/VideoUpload'
 
 
 function App() {
@@ -22,7 +22,9 @@ function App() {
 				
 				
 				<Route path='/DeshboardHome' element={<DeshboardHome />}>
+					
 					<Route path='personal' element={<Personal />} />
+					<Route path='VideoUpload' element={<VideoUpload />} />
 					{/* Add more routes here if needed */}
 				</Route>
 			

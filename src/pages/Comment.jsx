@@ -52,6 +52,7 @@ const Comment = () => {
             const response = await axios.post("http://127.0.0.1:8000/netfiex/api/review/", payload, {
                 headers: { Authorization: `Bearer ${token}` },  // Ensure the token is sent in the request
             });
+            console.log('respone : ',response.data)
             // Add the new comment to the list of comments
             setComments([...comments, response.data]);
             setComment('');
