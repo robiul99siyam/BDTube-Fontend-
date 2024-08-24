@@ -2,12 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import ProfileImage from "../image/images.png"; // Placeholder image
+import Content from './Content';
 
-const Navbar = () => {
+const Navbar = ({onItemSelect,id}) => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [profileImage, setProfileImage] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
+    const [search, setSearchResults] = useState([]);  // Initialized as an empty array
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/user/profile/image/")
@@ -44,9 +46,14 @@ const Navbar = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const query = event.target.search.value;
-        const response = await fetch(`http://127.0.0.1:8000/netfiex/api/content/?search=${query}`);
-        const data = await response.json();
-        console.log(data); // Display your search results
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/netfiex/api/content/?search=${query}`);
+            const data = await response.json();
+            console.log('Search results:', data);
+            setSearchResults(data);  // Set the search results
+        } catch (error) {
+            console.error('Error during search:', error);
+        }
     };
 
     return (
@@ -67,9 +74,43 @@ const Navbar = () => {
                         className="block w-[220px] md:w-[500px] focus:outline-none xl:w-[650px] rounded-l-full border-0 py-1.5 md:py-3 pl-8 p-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="search"
                     />
-                    <button className="bg-gray-300 py-1.5 md:py-3 w-10 md:w-25 xl:w-[80px] rounded-r-full focus:ring-green-600">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                    </button>
+                    {/* modal part  */}
+
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                    <div onClick={() => document.getElementById('my_modal_1').showModal()}>
+
+
+                        <button className="bg-gray-300 py-1.5 md:py-3 w-10 md:w-25 xl:w-[80px] rounded-r-full focus:ring-green-600">
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+
+                    </div>
+
+
+                    <dialog id="my_modal_1" className="modal">
+                        <div className="modal-box -mt-40">
+                            {!search ? (
+                                <span className="loading loading-spinner loading-lg"></span>
+                            ) : Array.isArray(search) && search.length > 0 ? (
+                                search.map(item => (
+                                    <Link to={`/view-content/${item.id}`} key={item.id}>
+                                        <p onClick={() => onItemSelect(item.id)} className="py-4 text-blue-500 underline">{item.title}</p>
+                                    </Link>
+                                ))
+                            ) : (
+                                <p>Not Found</p>
+                            )}
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    <button className="btn">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+
                 </form>
 
                 {/* Dropdown Part */}
@@ -83,7 +124,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Dropdown Menu */}
-                    <ul tabIndex="0" className="dropdown-content menu rounded-box w-64 bg-gray-50 shadow-lg absolute top-full right-0  mt-2">
+                    <ul tabIndex="0" className="dropdown-content menu rounded-box w-64 bg-gray-50 shadow-lg absolute top-full right-0 mt-2">
                         <div className="m-1 md:px-2 p-2 ml-14 w-20 rounded-full">
                             <img
                                 src={profileImage || ProfileImage}
@@ -116,6 +157,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+
 
         </>
     );

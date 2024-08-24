@@ -27,7 +27,7 @@ const ParentComponent = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar id={id} onItemSelect={setSelectedId}/>
             <div className='flex gap-5 flex-col md:flex-row'>
                 <Details data={data} id={selectedId} />
                 <Sidebar data={data} id={id} onItemSelect={setSelectedId} />
