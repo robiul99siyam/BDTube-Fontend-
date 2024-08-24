@@ -48,10 +48,10 @@ const Navbar = () => {
         const data = await response.json();
         console.log(data); // Display your search results
     };
-    
+
     return (
         <>
-            <div className="navbar mt-2 flex justify-between items-center sticky top-0">
+            <div className="flex justify-between items-center bg-white sticky z-50 top-0">
                 {/* Logo Part */}
                 <div className="flex justify-between items-center">
                     <Link to={"/"} className="text-[16px] md:text-[25px] font-serif font-semibold">
@@ -73,7 +73,7 @@ const Navbar = () => {
                 </form>
 
                 {/* Dropdown Part */}
-                <div className="dropdown dropdown-bottom dropdown-end">
+                <div className="dropdown dropdown-bottom dropdown-end relative ">
                     <div tabIndex="0" role="button" className="m-1 md:px-2 p-2 ml-2 w-16 rounded-full">
                         <img
                             src={profileImage || ProfileImage}
@@ -83,7 +83,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Dropdown Menu */}
-                    <ul tabIndex="0" className="dropdown-content menu bg-base-100 rounded-box z-[1] w-64 mt-5 shadow">
+                    <ul tabIndex="0" className="dropdown-content menu rounded-box w-64 bg-gray-50 shadow-lg absolute top-full right-0  mt-2">
                         <div className="m-1 md:px-2 p-2 ml-14 w-20 rounded-full">
                             <img
                                 src={profileImage || ProfileImage}
@@ -93,7 +93,6 @@ const Navbar = () => {
                         </div>
 
                         <br />
-
 
                         {!isLogin && (
                             <>
@@ -108,7 +107,7 @@ const Navbar = () => {
                                     <Link to={'/DeshboardHome/personal'}>View Profile</Link>
                                 </button>
                                 <br />
-                                <li><Link to="#">Upload Content</Link></li>
+                                <li><Link to="/DeshboardHome/VideoUpload">Upload Content</Link></li>
                                 <li onClick={handleLogout}>
                                     <Link to="#">Logout</Link>
                                 </li>
@@ -117,6 +116,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+
         </>
     );
 };

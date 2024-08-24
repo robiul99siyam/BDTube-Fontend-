@@ -71,7 +71,7 @@ const Details = ({ data, id }) => {
                     ...prevDetailItem,
                     total_likes: prevDetailItem.total_likes + 1,
                 }));
-                
+
                 swal({
                     text: "Content liked successfully.",
                     icon: "success",
@@ -140,50 +140,44 @@ const Details = ({ data, id }) => {
     return (
         <>
 
-            <div className='col-span-8 w-[70%] md:col-span-5 pb-10 xl:col-span-6'>
+          
+            <div className="col-span-8 w-[70%] md:col-span-5 pb-10 xl:col-span-6">
                 <video id="videoPlayer" controls autoPlay className="w-full rounded-xl">
                     <source src={detailItem.videofile} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div className='card-body mt-4'>
-
+                <div className="card-body mt-4">
                     <div className="flex gap-4 items-center mt-2">
-                        <h1 className='bg-gray-700 ring-[3px]  text-white hover:bg-gray-900 px-3   py-1 rounded-[50%] '>
-                            {detailItem.author && detailItem.author.username.charAt(0).toUpperCase()
-                            }
+                        <h1 className="bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]">
+                            {detailItem.author_username && detailItem.author_username.charAt(0).toUpperCase()}
                         </h1>
-                        <button onClick={handleLike} id="likeCount" type="button" className="cursor-pointer ml-10 bg-slate-200 py-3 w-[100px] rounded-full">
-                            <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span id="likeCount">{detailItem.total_likes}</span>
+                        <button
+                            onClick={handleLike}
+                            type="button"
+                            className="cursor-pointer ml-10 bg-slate-200 py-3 w-[100px] rounded-full"
+                        >
+                            <i className="fa-regular fa-thumbs-up focus:outline-none focus:ring focus:ring-violet-300"></i> | <span>{detailItem.total_likes}</span>
                         </button>
-
                     </div>
                     <h1>{detailItem.title}</h1>
                 </div>
 
-
-                <div className='bg-gray-200 rounded-lg p-3'>
-                    <h1 className='font-bold'>This video views : {detailItem.total_views}</h1>
-                    <p className='cursor-pointer' onClick={() => setOpen(!open)}>
-                        {
-
-                            !open ? `${detailItem.description.slice(0, 150)}` : `${detailItem.description}`
-                        }
-                        {
-                            !open ? <p className="font-bold">See More....</p> : <p className="font-bold">See Less.... </p>
-                        }
+                <div className="bg-gray-200 rounded-lg p-3">
+                    <h1 className="font-bold">This video has been viewed {detailItem.total_views} times.</h1>
+                    <p className="cursor-pointer" onClick={() => setOpen(!open)}>
+                        {!open ? `${detailItem.description.slice(0, 150)}` : `${detailItem.description}`}
+                        {!open ? <p className="font-bold">See More...</p> : <p className="font-bold">See Less...</p>}
                     </p>
                 </div>
 
-
                 <Comment />
 
-
-                <h1>Comments 👏👏 {detailItem.reivew_content.length}</h1>
+                <h1>Comments 👏👏 {detailItem.reivew_content && detailItem.reivew_content.length}</h1>
 
                 {detailItem.reivew_content && detailItem.reivew_content.length > 0 ? (
                     detailItem.reivew_content.map((review) => (
                         <div key={review.id} className="flex gap-4 items-center mt-2">
-                            <h1 className='bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]'>
+                            <h1 className="bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]">
                                 {review.username && review.username.charAt(0).toUpperCase()}
                             </h1>
                             <p>{review.comment}</p>
@@ -193,22 +187,9 @@ const Details = ({ data, id }) => {
                 ) : (
                     <p>No reviews available.</p>
                 )}
-
-
-
-
-
-
-
             </div>
-
-
         </>
     );
 };
 
 export default Details;
-
-
-
-

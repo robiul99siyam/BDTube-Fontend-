@@ -12,12 +12,13 @@ const Content = () => {
             .catch(err => console.error('Error fetching content:', err));
     }, []);
 
-    const categories = [...new Set(data.map(item => item.category.name))];
+    // const categories = [...new Set(data.map(item => item.category.name))];
+
+    const categories = [...new Set(data.map(item => item.category_name))];  // Changed this line
 
     const filteredData = selectedCategory === 'all'
         ? data
-        : data.filter(item => item.category.name === selectedCategory);
-
+        : data.filter(item => item.category_name === selectedCategory);
 
     if (data.length === 0) {
         return (
@@ -52,7 +53,7 @@ const Content = () => {
     }
 
     return (
-        <div>
+        <div >
             <div className="py-4">
                 <div className="flex gap-4 mb-4">
                     <button
@@ -96,7 +97,7 @@ const Content = () => {
                             <div className="card-body flex flex-col justify-between h-40">
                                 <div className='flex gap-2'>
                                     <h1 className='bg-gray-900 ring-green-700 text-white hover:bg-gray-800 px-3 ring-[3px] py-1 rounded-[50%]'>
-                                        {item.author && item.author.username.charAt(0).toUpperCase()}
+                                        {item.author_username && item.author_username.charAt(0).toUpperCase()}  {/* Changed this line */}
                                     </h1>
                                     <h1 className='font-bold text-md'>{item.title.slice(0, 30)}...</h1>
                                 </div>

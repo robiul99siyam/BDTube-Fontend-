@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import DeshboardHome from './pages/deshboard/DeshboardHome';
 import Personal from './pages/deshboard/Personal';
 import VideoUpload from './pages/deshboard/VideoUpload'
+import PlayList from './pages/deshboard/Playlist'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 					
 					<Route path='personal' element={<Personal />} />
 					<Route path='VideoUpload' element={<VideoUpload />} />
+					<Route path='PlayList' element={<PlayList />} />
 					{/* Add more routes here if needed */}
 				</Route>
 			
