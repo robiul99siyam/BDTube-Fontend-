@@ -59,7 +59,7 @@ const DeshboardHome = () => {
                             <Link to={"PlayList"}>
 
                                 <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
-                                    <i className="fa-solid px-3 fa-list"></i> Playlist
+                                    <i className="fa-solid px-3 fa-list"></i> All Video
                                 </p>
                             </Link>
                             <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
