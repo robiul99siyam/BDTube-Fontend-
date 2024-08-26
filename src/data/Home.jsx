@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './../pages/Navbar';
-import Content from './../pages/Content';
+import Navbar from '../pages/Navbar';
+import Content from '../pages/Content';
 
 
 const Home = () => {

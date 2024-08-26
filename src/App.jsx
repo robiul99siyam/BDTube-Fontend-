@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './data/Index'; 
+import Home from './data/Home'; 
 import ParentComponent from './pages/ParentComponent';
 import Register from './pages/Register';
 import Login from "./pages/Login"
 import DeshboardHome from './pages/deshboard/DeshboardHome';
 import Personal from './pages/deshboard/Personal';
 import VideoUpload from './pages/deshboard/VideoUpload'
-import PlayList from './pages/deshboard/Playlist'
+import AllVideo from './pages/deshboard/AllVideo'
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 			<Routes>
 				
 				<Route path='/' element={<Home />} />
-				<Route path='/view-content/:id' element={<ParentComponent />} />
+				<Route path='/view-content/:id/:name' element={<ParentComponent />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login/>}/>
 				
@@ -26,7 +26,7 @@ function App() {
 					
 					<Route path='personal' element={<Personal />} />
 					<Route path='VideoUpload' element={<VideoUpload />} />
-					<Route path='PlayList' element={<PlayList />} />
+					<Route path='AllVideo' element={<AllVideo />} />
 					{/* Add more routes here if needed */}
 				</Route>
 			

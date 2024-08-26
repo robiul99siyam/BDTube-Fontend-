@@ -31,11 +31,11 @@ const DeshboardHome = () => {
     return (
         <>
             <div className="flex justify-between mt-10 px-0 md:px-10 py-19">
-                <h1 className="font-bold text-2xl">
-                    <Link to={"/"}>
+                <Link to={"/"}>
+                    <h1 className="font-bold text-2xl">
                         <i className="fa-brands fa-youtube text-red-500"></i> BDTube Profile
-                    </Link>
-                </h1>
+                    </h1>
+                </Link>
                 <h1>UserName: {username}</h1>
             </div>
             {/* Sidebar part  */}
@@ -56,7 +56,7 @@ const DeshboardHome = () => {
                                 </p>
                             </Link>
 
-                            <Link to={"PlayList"}>
+                            <Link to={"AllVideo"}>
 
                                 <p className="py-6 px-3 border-l-8 border-l-white hover:border-l-8 hover:border-l-blue-600 hover:bg-gray-50 text-xl transition-colors duration-200">
                                     <i className="fa-solid px-3 fa-list"></i> All Video

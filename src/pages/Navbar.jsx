@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import ProfileImage from "../image/images.png"; // Placeholder image
 import Content from './Content';
 
-const Navbar = ({onItemSelect,id}) => {
+const Navbar = ({ onItemSelect, id }) => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [profileImage, setProfileImage] = useState(null);
@@ -144,9 +144,11 @@ const Navbar = ({onItemSelect,id}) => {
 
                         {isLogin && (
                             <>
-                                <button className="btn btn-primary">
-                                    <Link to={'/DeshboardHome/personal'}>View Profile</Link>
-                                </button>
+                                <Link to={'/DeshboardHome/personal'}>
+                                    <button className=" w-[240px] bg-blue-500 mt-5 p-4 text-white hover:bg-blue-700 rounded-md">
+                                        View Profile
+                                    </button>
+                                </Link>
                                 <br />
                                 <li><Link to="/DeshboardHome/VideoUpload">Upload Content</Link></li>
                                 <li onClick={handleLogout}>

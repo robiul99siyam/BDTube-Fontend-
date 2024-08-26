@@ -75,7 +75,7 @@ const Content = () => {
             </div>
             <div className="grid grid-cols-1 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-5">
                 {filteredData.map(item => (
-                    <Link to={`/view-content/${item.id}`} key={item.id}>
+                    <Link to={`/view-content/${item.id}/${item.title}`} key={item.id}>
                         <div className="relative group card bg-base-100 shadow-xl h-80">
                             <figure className="relative h-64">
                                 <img

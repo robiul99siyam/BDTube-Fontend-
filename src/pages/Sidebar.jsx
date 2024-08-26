@@ -6,7 +6,7 @@ const Sidebar = ({ data, onItemSelect, id }) => {
         <>
             <div className="w-[30%] shadow-xl border border-gray-400 rounded">
                 {data.map(item => (
-                    <Link to={`/view-content/${item.id}`} key={item.id}>
+                    <Link to={`/view-content/${item.id}/${item.title}`} key={item.id}>
                         <div
 
                             className="flex gap-3 font-medium hover:bg-gray-200 rounded-md p-2 cursor-pointer"
