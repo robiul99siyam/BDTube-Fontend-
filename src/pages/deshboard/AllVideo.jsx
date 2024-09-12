@@ -40,7 +40,7 @@ const AllVideo = () => {
                 {filteredData.length > 0 ? (
                     filteredData.map(item => (
                         <div key={item.id} className="relative">
-                            <Link to={`/view-content/${item.id}`}>
+                            <Link to={`/view-content/${item.id}/${item.title}`}>
                                 <img src={item.thumbell} className="w-[230px] h-[140px] rounded-md" alt="" />
                                 <div className="w-[228px] font-mono mt-2">
                                     <p className="font-bold truncate">{item.title}</p>

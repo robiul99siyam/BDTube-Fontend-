@@ -8,6 +8,8 @@ import DeshboardHome from './pages/deshboard/DeshboardHome';
 import Personal from './pages/deshboard/Personal';
 import VideoUpload from './pages/deshboard/VideoUpload'
 import AllVideo from './pages/deshboard/AllVideo'
+import Watch from './pages/deshboard/Watch';
+
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
 					<Route path='personal' element={<Personal />} />
 					<Route path='VideoUpload' element={<VideoUpload />} />
 					<Route path='AllVideo' element={<AllVideo />} />
+					<Route path='Watch' element={<Watch />} />
+					
 					{/* Add more routes here if needed */}
 				</Route>
 			

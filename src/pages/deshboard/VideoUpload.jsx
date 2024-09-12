@@ -14,7 +14,7 @@ const VideoUpload = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/category/")
+        fetch("http://127.0.0.1:8000/netfiex/category/")
             .then(res => res.json())
             .then(data => setCategories(data));
     }, []);

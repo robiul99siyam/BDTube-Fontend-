@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import ProfileImage from "../image/images.png"; // Placeholder image
 import Content from './Content';
+import Notification from './../Notification';
 
 const Navbar = ({ onItemSelect, id }) => {
     const navigate = useNavigate();
@@ -94,7 +95,7 @@ const Navbar = ({ onItemSelect, id }) => {
                                 <span className="loading loading-spinner loading-lg"></span>
                             ) : Array.isArray(search) && search.length > 0 ? (
                                 search.map(item => (
-                                    <Link to={`/view-content/${item.id}`} key={item.id}>
+                                    <Link to={`/view-content/${item.id}/${item.title}`} key={item.id}>
                                         <p onClick={() => onItemSelect(item.id)} className="py-4 text-blue-500 underline">{item.title}</p>
                                     </Link>
                                 ))
@@ -113,6 +114,7 @@ const Navbar = ({ onItemSelect, id }) => {
 
                 </form>
 
+                <Notification />
                 {/* Dropdown Part */}
                 <div className="dropdown dropdown-bottom dropdown-end relative ">
                     <div tabIndex="0" role="button" className="m-1 md:px-2 p-2 ml-2 w-16 rounded-full">
@@ -122,6 +124,7 @@ const Navbar = ({ onItemSelect, id }) => {
                             className="w-full h-full object-cover rounded-full"
                         />
                     </div>
+                    
 
                     {/* Dropdown Menu */}
                     <ul tabIndex="0" className="dropdown-content menu rounded-box w-64 bg-gray-50 shadow-lg absolute top-full right-0 mt-2">

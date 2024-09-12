@@ -13,14 +13,57 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <style>
-    *{
+    * {
       margin: 0px;
       padding: 0px;
       box-sizing: border-box;
     }
+
+    .notification-dropdown {
+      position: absolute;
+      right: 10px;
+      top: 40px;
+      background-color: white;
+      border: 1px solid #ccc;
+      width: 200px;
+      padding: 10px;
+      z-index: 100; 
+    }
+
+    .notification-dropdown h3 {
+      margin: 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .notification-dropdown ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notification-dropdown li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .notification-dropdown li:last-child {
+      border-bottom: none;
+    }
+
+    .badge {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 12px;
+      /* position: absolute; */
+      /* top: 0;
+      right: 0; */
+    }
   </style>
 </head>
-<body class="mx-5 xl:mx-24  font-serif ">
+
+<body class="mx-5 xl:mx-24 bg-white font-serif ">
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

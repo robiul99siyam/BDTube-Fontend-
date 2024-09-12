@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Added Link here
 import swal from "sweetalert";
 
 const Playlist = () => {
@@ -9,7 +9,10 @@ const Playlist = () => {
     const [listname, setListname] = useState("");
     const [content, setContent] = useState([]);
     const token = localStorage.getItem("authToken");
-    const navigate = useNavigate()
+    const [playlistData, setPlayList] = useState([]);
+    const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+    const navigate = useNavigate();
+
     useEffect(() => {
         fetch("http://127.0.0.1:8000/netfiex/api/content/")
             .then(res => res.json())
@@ -18,15 +21,23 @@ const Playlist = () => {
 
     const FilterPlayListData = data.filter(item => item.author_id === userId);
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/netfiex/api/playlist/")
+            .then(res => res.json())
+            .then(playlistData => setPlayList(playlistData));
+    }, []);
+
+    const playFilterData = playlistData.filter(item => item.user === parseInt(userId));
+
     const handlePlaylist = async (e) => {
         e.preventDefault();
-    
+
         const data = {
             list_name: listname,
             user: userId,
             content: content,
         };
-    
+
         try {
             const response = await axios.post('http://127.0.0.1:8000/netfiex/api/playlist/', data, {
                 headers: {
@@ -35,6 +46,7 @@ const Playlist = () => {
                 },
             });
             console.log(response);
+            navigate("/")
             document.getElementById("my_modal_6").checked = false;
             swal({
                 text: "Playlist created successfully!",
@@ -56,25 +68,20 @@ const Playlist = () => {
             }
         }
     };
-    
-    
+
+    const handleBoxClick = (playlist) => {
+        setSelectedPlaylist(playlist);
+    };
 
     return (
         <>
-
-
-            <label htmlFor="my_modal_6" className="mt-10 mx-auto w-[150px] bg-blue-500 mt-5 p-4 text-white hover:bg-blue-700 rounded-md text-center block">PlayList Create </label>
-
-
+            <label htmlFor="my_modal_6" className="mt-10 mx-auto w-[150px] bg-blue-500 p-4 text-white hover:bg-blue-700 rounded-md text-center block">PlayList Create</label>
 
             <input type="checkbox" id="my_modal_6" className="modal-toggle" />
             <div className="modal" role="dialog">
                 <div className="modal-box">
-
-
+                    <label htmlFor="my_modal_6" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handlePlaylist}>
-
-
                         <label className="font-bold">Playlist Name</label>
                         <input
                             value={listname}
@@ -94,7 +101,6 @@ const Playlist = () => {
                                 const selectedOptions = Array.from(e.target.selectedOptions, option => parseInt(option.value));
                                 setContent(selectedOptions);
                             }}
-                            
                             required
                         >
                             {FilterPlayListData.map((item) => (
@@ -107,10 +113,55 @@ const Playlist = () => {
                         <div className="modal-action">
                             <button type="submit" className="btn">Post!</button>
                         </div>
-
                     </form>
                 </div>
             </div>
+
+            {playFilterData.map((playlist) => (
+                <div
+                    key={playlist.id}
+                    className="max-w-xs rounded-lg overflow-hidden shadow-lg m-4 cursor-pointer"
+                    onClick={() => handleBoxClick(playlist)}
+                >
+                    <img
+                        src={playlist.content_title[0].thumbell}
+                        className="w-full opacity-28 h-40 object-cover"
+                        alt={playlist.list_name}
+                    />
+                    <div className="p-4">
+                        <h2 className="text-lg font-semibold truncate">{playlist.list_name}</h2>
+                        <p className="text-sm text-gray-600">{playlist.content_title.length} videos</p>
+                    </div>
+                </div>
+            ))
+            }
+
+            {selectedPlaylist && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg max-w-lg w-[30%]">
+                        <h2 className="text-xl font-bold mb-4">{selectedPlaylist.list_name}</h2>
+                        {selectedPlaylist.content_title.map((item) => (
+                            <Link to={`/view-content/${item.id}/${item.title}`} key={item.id}>
+                                <div key={item.id} className="mb-4">
+                                    <img
+                                        src={item.thumbell}
+                                        className="w-full h-40 object-cover mb-2"
+                                        alt={item.title}
+                                    />
+                                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                                    
+                                </div>
+                            </Link>
+                        ))}
+                        <button
+                            onClick={() => setSelectedPlaylist(null)}
+                            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
