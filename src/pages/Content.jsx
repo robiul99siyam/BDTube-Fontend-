@@ -5,13 +5,16 @@ const Content = () => {
     const [data, setData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [startTime, setStartTime] = useState(null);
-
     useEffect(() => {
         fetch("http://127.0.0.1:8000/netfiex/api/content/")
             .then(res => res.json())
-            .then(data => setData(data))
+            .then(data => {
+                console.log("API Data:", data); // Log the data
+                setData(data);
+            })
             .catch(err => console.error('Error fetching content:', err));
     }, []);
+    
 
     // Handle video play event
     const handlePlay = () => {

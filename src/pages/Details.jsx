@@ -4,36 +4,43 @@ import Comment from './Comment';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-
 const Details = ({ data, id }) => {
     const [detailItem, setDetailItem] = useState(null);
+    const [comments, setComments] = useState([]); // Store comments in the parent component
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate()
-
-
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        const userId = localStorage.getItem("userId");
 
-        const token = localStorage.getItem("authToken")
-        const userId = localStorage.getItem("userId")
-
-        if (!token && !userId) {
+        if (!token || !userId) {
             const timer = setTimeout(() => {
                 swal({
                     text: "Please login to continue.",
                     icon: "error",
-                    timer: 4000,
+                    timer: 2000,
                     buttons: false,
                 });
-                navigate("/login")
-            }, 20000);
-
+                navigate("/login");
+            }, 2000);
             return () => clearTimeout(timer);
         }
-    }, [navigate])
+    }, [navigate]);
 
     useEffect(() => {
-    }, [])
+        const fetchDetails = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/netfiex/api/content/${id}`);
+                setDetailItem(response.data);
+                setComments(response.data.review_content); // Set comments
+            } catch (err) {
+                console.error("Error fetching details:", err);
+            }
+        };
+
+        fetchDetails();
+    }, [id]);
 
     const handleLike = async () => {
         const userId = localStorage.getItem("userId");
@@ -43,7 +50,7 @@ const Details = ({ data, id }) => {
             swal({
                 text: "Please login to like this video.",
                 icon: "error",
-                timer: 4000,
+                timer: 2000,
                 buttons: false,
             });
             return;
@@ -51,22 +58,17 @@ const Details = ({ data, id }) => {
 
         const paylike = {
             user: parseInt(userId),
-            content: parseInt(id)
+            content: parseInt(id),
         };
 
-        console.log("Data to send:", paylike);
-
         try {
-            // Sending the data as JSON
             const response = await axios.post(
                 `http://127.0.0.1:8000/netfiex/video/${id}/like/`,
                 paylike,
                 { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
             );
-            console.log("Like response:", response.data);
 
             if (response.data) {
-
                 setDetailItem((prevDetailItem) => ({
                     ...prevDetailItem,
                     total_likes: prevDetailItem.total_likes + 1,
@@ -75,63 +77,29 @@ const Details = ({ data, id }) => {
                 swal({
                     text: "Content liked successfully.",
                     icon: "success",
-                    timer: 4000,
+                    timer: 2000,
                     buttons: false,
                 });
             }
 
         } catch (err) {
-            if (err.response) {
-                console.error("Error Data:", err.response.data);
-                swal({
-                    text: "You have Already Like it ",
-                    icon: "error",
-                    timer: 4000,
-                    buttons: false,
-                });
-            } else {
-                console.error("Error:", err.message);
-                swal({
-                    text: "An unexpected error occurred.",
-                    icon: "error",
-                    timer: 4000,
-                    buttons: false,
-                });
-            }
+            const errorMessage = err.response?.data || "An unexpected error occurred.";
+            console.error("Error:", errorMessage);
+
+            swal({
+                text: err.response ? "You have already liked it." : "An unexpected error occurred.",
+                icon: "error",
+                timer: 2000,
+                buttons: false,
+            });
         }
     };
-
-
-
-
-    useEffect(() => {
-        const foundItem = data.find(item => String(item.id) === id);
-        setDetailItem(foundItem);
-    }, [data, id]);
 
     if (!detailItem) {
         return (
             <div className="max-w-xl mx-auto">
-                <div className="p-4 bg-white  rounded-md">
-                    <div className="flex">
-                        <div className="mr-4 bg-gray-200 border border-gray-200 h-16 w-16 rounded animate-pulse"></div>
-                        <div className="space-y-1 flex flex-col w-full">
-                            <div className="flex w-full items-center">
-                                <div className="bg-gray-200 border border-gray-200 w-60 h-5 animate-pulse"></div>
-                                <div className="ml-4 bg-gray-200 border border-gray-200 w-12 h-5 animate-pulse"></div>
-                            </div>
-                            <div className="bg-gray-200 border border-gray-200 w-36 h-5 animate-pulse"></div>
-                            <div className="bg-gray-200 border border-gray-200 w-full h-44 animate-pulse"></div>
-                        </div>
-                    </div>
-                    <div className="mt-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <div className="bg-gray-200 border border-gray-200 w-16 h-5 animate-pulse"></div>
-                            <span className="bg-gray-200 h-1 w-1 rounded animate-pulse"></span>
-                            <div className="bg-gray-200 border border-gray-200 w-16 h-5 animate-pulse"></div>
-                        </div>
-                        <div className="bg-gray-200 border border-gray-200 w-16 h-5 animate-pulse"></div>
-                    </div>
+                <div className="p-4 bg-white rounded-md">
+                    {/* Loading Skeleton */}
                 </div>
             </div>
         );
@@ -139,8 +107,6 @@ const Details = ({ data, id }) => {
 
     return (
         <>
-
-          
             <div className="col-span-8 w-[70%] md:col-span-5 pb-10 xl:col-span-6">
                 <video id="videoPlayer" controls autoPlay className="w-full rounded-xl">
                     <source src={detailItem.videofile} type="video/mp4" />
@@ -166,16 +132,16 @@ const Details = ({ data, id }) => {
                     <h1 className="font-bold">This video has been viewed {detailItem.total_views} times.</h1>
                     <p className="cursor-pointer" onClick={() => setOpen(!open)}>
                         {!open ? `${detailItem.description.slice(0, 150)}` : `${detailItem.description}`}
-                        {!open ? <p className="font-bold">See More...</p> : <p className="font-bold">See Less...</p>}
+                        {!open ? <span className="font-bold">See More...</span> : <span className="font-bold">See Less...</span>}
                     </p>
                 </div>
 
-                <Comment />
+                <Comment comments={comments} setComments={setComments} />
 
-                <h1>Comments 👏👏 {detailItem.reivew_content && detailItem.reivew_content.length}</h1>
+                <h1>Comments 👏👏 {detailItem.review_content && detailItem.review_content.length}</h1>
 
-                {detailItem.reivew_content && detailItem.reivew_content.length > 0 ? (
-                    detailItem.reivew_content.map((review) => (
+                {detailItem.review_content && detailItem.review_content.length > 0 ? (
+                    detailItem.review_content.map((review) => (
                         <div key={review.id} className="flex gap-4 items-center mt-2">
                             <h1 className="bg-gray-700 ring-[3px] text-white hover:bg-gray-900 px-3 py-1 rounded-[50%]">
                                 {review.username && review.username.charAt(0).toUpperCase()}

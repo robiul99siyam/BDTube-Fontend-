@@ -13,7 +13,9 @@ const Comment = () => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/netfiex/api/content/${params.id}`);
-                setComments(response.data);
+                console.log('Comments response:', response.data);  // Check the structure of the response here
+                // Assuming the response contains the comments list, assign it to comments
+                setComments(response.data.review_content || []);  // Adjust based on actual structure
             } catch (err) {
                 console.error("Error fetching comments:", err);
             }
@@ -22,10 +24,7 @@ const Comment = () => {
         fetchComments();
     }, [params.id]);
 
-    const handleCommentChange = (e) => {
-        setComment(e.target.value);
-    };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,7 +42,7 @@ const Comment = () => {
         }
 
         const payload = {
-            user: parseInt(userId),  // Just send the userId
+            user: parseInt(userId),  // Send the userId
             content: parseInt(params.id),
             comment: comment,
         };
@@ -52,10 +51,11 @@ const Comment = () => {
             const response = await axios.post("http://127.0.0.1:8000/netfiex/api/review/", payload, {
                 headers: { Authorization: `Bearer ${token}` },  // Ensure the token is sent in the request
             });
-            console.log('respone : ',response.data)
+            console.log('New comment response:', response.data);  // Check the structure of the newly posted comment
+
             // Add the new comment to the list of comments
-            setComments([...comments, response.data]);
-            setComment('');
+            setComments([...comments, response.data]);  // Make sure response.data contains the new comment object
+            setComment('');  // Clear the comment input field after submission
         } catch (err) {
             if (err.response) {
                 console.error("Error Data:", err.response.data);
@@ -71,8 +71,14 @@ const Comment = () => {
         }
     };
 
+    // Handle input change
+    const handleCommentChange = (e) => {
+        setComment(e.target.value);
+    };
+
     return (
         <div>
+            {/* Comment Submission Form */}
             <form onSubmit={handleSubmit}>
                 <div className="flex justify-start my-5 gap-5">
                     <input
@@ -88,20 +94,21 @@ const Comment = () => {
                 </div>
             </form>
 
-
-
+            {/* Comments List */}
             <div className="comments-list">
-                {comments.map((commentItem) => (
-                    <div key={commentItem.id} className="comment-item my-2 p-3 border-b">
-                        <p>{commentItem.comment}</p>
-                        <small>Posted by User {commentItem.username} on {new Date(commentItem.datePosted).toLocaleString()}</small>
-                    </div>
-                ))}
+                {comments.length > 0 ? (
+                    comments.map((commentItem) => (
+                        <div key={commentItem.id} className="comment-item my-2 p-3 border-b">
+                            <p>{commentItem.comment}</p>
+                            <small>
+                                Posted by User {commentItem.username || 'Anonymous'} on {new Date(commentItem.datePosted).toLocaleString()}
+                            </small>
+                        </div>
+                    ))
+                ) : (
+                    <p>No comments yet.</p>
+                )}
             </div>
-
-
-
-            
         </div>
     );
 };
