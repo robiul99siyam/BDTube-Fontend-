@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 const Edit = ({ data, id }) => {
     const test = data.filter(item => item.id === id);
 

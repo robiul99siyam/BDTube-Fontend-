@@ -12,6 +12,7 @@ const AllVideo = () => {
         fetch("http://127.0.0.1:8000/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data));
+            console.log("dagta",data);
     }, []);
 
 
@@ -31,7 +32,7 @@ const AllVideo = () => {
     };
 
     const filteredData = data.filter(item => item.author_id === userId);
-
+    console.log(filteredData)
 
     return (
         <>
