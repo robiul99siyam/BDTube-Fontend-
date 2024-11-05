@@ -12,7 +12,7 @@ const Comment = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/netfiex/api/content/${params.id}`);
+                const response = await axios.get(`https://robiulislam0580.pythonanywhere.com/netfiex/api/content/${params.id}`);
                 console.log('Comments response:', response.data);  // Check the structure of the response here
                 // Assuming the response contains the comments list, assign it to comments
                 setComments(response.data.review_content || []);  // Adjust based on actual structure
@@ -48,7 +48,7 @@ const Comment = () => {
         };
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/netfiex/api/review/", payload, {
+            const response = await axios.post("https://robiulislam0580.pythonanywhere.com/api/review/", payload, {
                 headers: { Authorization: `Bearer ${token}` },  // Ensure the token is sent in the request
             });
             console.log('New comment response:', response.data);  // Check the structure of the newly posted comment

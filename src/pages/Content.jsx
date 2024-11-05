@@ -6,7 +6,7 @@ const Content = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [startTime, setStartTime] = useState(null);
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/content/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => {
                 console.log("API Data:", data); // Log the data
@@ -37,7 +37,7 @@ const Content = () => {
 
             // Send the watch time data to the backend
             try {
-                fetch('http://127.0.0.1:8000/netfiex/videoWatch/', {
+                fetch('https://robiulislam0580.pythonanywhere.com/netfiex/videoWatch/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

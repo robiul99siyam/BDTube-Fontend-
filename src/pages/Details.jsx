@@ -31,7 +31,7 @@ const Details = ({ data, id }) => {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/netfiex/api/content/${id}`);
+                const response = await axios.get(`https://robiulislam0580.pythonanywhere.com/netfiex/api/content/${id}`);
                 setDetailItem(response.data);
                 setComments(response.data.review_content); // Set comments
             } catch (err) {
@@ -63,7 +63,7 @@ const Details = ({ data, id }) => {
 
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/netfiex/video/${id}/like/`,
+                `https://robiulislam0580.pythonanywhere.com/netfiex/video/${id}/like/`,
                 paylike,
                 { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
             );

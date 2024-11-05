@@ -38,7 +38,7 @@ const Register = () => {
         if (image) formData.append('image', image);
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/user/account/create/", formData, {
+            const response = await axios.post("https://robiulislam0580.pythonanywhere.com/user/account/create/", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

@@ -13,7 +13,7 @@ const Navbar = ({ onItemSelect, id }) => {
     const [search, setSearchResults] = useState([]);  // Initialized as an empty array
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/user/profile/image/")
+        fetch("https://robiulislam0580.pythonanywhere.com/user/profile/image/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(error => console.error("Error fetching profile data:", error));
@@ -48,7 +48,7 @@ const Navbar = ({ onItemSelect, id }) => {
         event.preventDefault();
         const query = event.target.search.value;
         try {
-            const response = await fetch(`http://127.0.0.1:8000/netfiex/api/content/?search=${query}`);
+            const response = await fetch(`https://robiulislam0580.pythonanywhere.com/netfiex/api/content/?search=${query}`);
             const data = await response.json();
             console.log('Search results:', data);
             setSearchResults(data);  // Set the search results

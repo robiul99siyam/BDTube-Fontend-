@@ -15,7 +15,7 @@ const ParentComponent = () => {
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/content/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => console.error(err));
