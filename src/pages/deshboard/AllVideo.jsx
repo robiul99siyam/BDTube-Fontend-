@@ -9,7 +9,7 @@ const AllVideo = () => {
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/content/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data));
             console.log("dagta",data);
@@ -18,7 +18,7 @@ const AllVideo = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://127.0.0.1:8000/netfiex/api/content/${id}/`, {
+        fetch(`https://robiulislam0580.pythonanywhere.com/netfiex/api/content/${id}/`, {
             method: 'DELETE',
         })
             .then(res => {

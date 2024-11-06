@@ -8,7 +8,7 @@ const Watch = () => {
     });
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/videoWatch/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/videoWatch/")
             .then(response => response.json())
             .then(data => {
                 console.log('API Data:', data); // Inspect the data

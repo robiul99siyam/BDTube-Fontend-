@@ -15,7 +15,7 @@ const Playlist = () => {
 
     // Fetch content data
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/content/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/api/content/")
             .then(res => res.json())
             .then(data => setData(data));
     }, []);
@@ -24,7 +24,7 @@ const Playlist = () => {
 
     // Fetch playlist data
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/api/playlist/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/api/playlist/")
             .then(res => res.json())
             .then(playlistData => setPlayList(playlistData));
     }, []);
@@ -42,7 +42,7 @@ const Playlist = () => {
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/netfiex/api/playlist/', postData, {
+            const response = await axios.post('https://robiulislam0580.pythonanywhere.com/netfiex/api/playlist/', postData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ const DeshboardHome = () => {
         setIsLogin(!!token && !!userId);
 
         if (token && userId) {
-            fetch("http://127.0.0.1:8000/user/profile/image/")
+            fetch("https://robiulislam0580.pythonanywhere.com/user/profile/image/")
                 .then(res => res.json())
                 .then(data => {
                     setData(data);

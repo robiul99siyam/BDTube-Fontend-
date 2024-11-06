@@ -14,7 +14,7 @@ const VideoUpload = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/netfiex/category/")
+        fetch("https://robiulislam0580.pythonanywhere.com/netfiex/category/")
             .then(res => res.json())
             .then(data => setCategories(data));
     }, []);
@@ -50,7 +50,7 @@ const VideoUpload = () => {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/netfiex/api/content/", formData, {
+            const response = await axios.post("https://robiulislam0580.pythonanywhere.com/netfiex/api/content/", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
